@@ -109,7 +109,7 @@ google()
   });
 */
 
-//Version 2: await
+//Version 3: await
 function google(next = () => {}) {
   return new Promise(function(resolve, reject) {
     request("https://www.google.com").on("response", function(err, body) {
