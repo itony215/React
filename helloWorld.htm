@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Hello World</title>
+	<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+	<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+	<script>
+		window.addEventListener("load", ()=>{
+			// 1. 建立型態為 H1 的 React Element，並且包含文字 Hello World (文字也是一種子元件)
+			//    相當於 <H1>Hello World</H1>
+			let reactElement=React.createElement("H1", null, "Hello World");
+			// 2. 將建立好的 React Element 畫到容器中，這裡的容器使用 HTML Body Element 
+			ReactDOM.render(
+				reactElement, document.body
+			);
+		});
+	</script>
+</head>
+<body>
+</body>
+</html>
