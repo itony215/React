@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Hello World</title>
+	<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+	<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+	<script>
+		class ListItem extends React.Component {
+			render() {
+				return React.createElement("li", null, "Item " + this.props.index)
+			};
+		}
+		class List extends React.Component {
+			constructor(props) {
+				super(props);
+				this.state = { max: 4 }
+				window.setTimeout(() => {
+					this.setState((currentState, currentProps) => ({ max: this.state.max + 2 }))
+				}, 2000);
+			}
+			render() {
+				let items = [];
+				for (let i = 1; i <= this.state.max; i++) {
+					let item = React.createElement(ListItem, { index: i });
+					items.push(item);
+				}
+				return React.createElement("ul", null, items);
+			}
+		}
+		window.addEventListener("load", () => {
+			let element = React.createElement(List);
+			ReactDOM.render(element, document.body);
+		});
+
+
+	</script>
+</head>
+
+<body>
+</body>
+
+</html>
