@@ -13,15 +13,25 @@
   <!-- 包含JSX 語法的javascript 必須使用 type="text/babel" -->
   <script type="text/babel">
     //設計組件類別
+    
     class MyHead extends React.Component{
       render(){
-        //return React.createElement("h1",null,"Hello World");
-        return <h1>Hello World</h1>;
+        //return React.createElement("div",{className:"head"},"Hello World"+this.props.level);
+        return <div className="head">Hello World {this.props.level}</div>;
+      }
+    }
+    class MyHeadList extends React.Component{
+      render(){
+        return <div>
+            <MyHead level="1"/>
+            <MyHead level="2"/>
+            <MyHead level="3"/>
+          </div>
       }
     }
     window.addEventListener("load",()=>{
       // 1. 建立自訂的React 組件實體，給定屬性
-      let element = <MyHead />//React.createElement(MyHead);
+      let element = <MyHeadList /> //React.createElement(MyHeadList);
       // 2. 將建立好的 React 組件實體 畫到容器中
       ReactDOM.render(element,document.body);
     })

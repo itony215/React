@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>form</title>
+  <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+  <!-- 載入Babel 編譯器套件 -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <!-- 包含JSX 語法的javascript 必須使用 type="text/babel" -->
+
+  <script type="text/babel">
+    class Myform extends React.Component{
+      constructor(props){
+        super(props);
+        this.state = {name:"",gender:'male',story:''}
+      }
+      render(){
+        return <form onSubmit={this.handleSubmit.bind(this)}>
+          Name <input type="text" vaule={this.state.name} onChange={this.handleNameChange.bind(this)} />
+          <br/>
+          Gender <select vaule={this.state.gender} onChange={this.handleGenderChange.bind(this)} >
+                      <option value="male">男</option>
+                      <option value="female">女</option>
+                 </select>
+          <br/>
+          Story <textarea vaule={this.state.story} onChange={this.handleStoryChange.bind(this)}/>
+          <br/>
+          <input type="submit" value="Submit" />
+          </form>;
+      }
+      handleStoryChange(e){
+        this.setState({story:e.currentTarget.value});
+      }
+      handleGenderChange(e){
+        this.setState({gender:e.currentTarget.value});
+      }
+      handleNameChange(e){
+        this.setState({name:e.currentTarget.value});
+      }
+      handleSubmit(e){
+        e.preventDefault();
+        console.log("表單送出");
+        console.log("nmae: "+this.state.name);
+        console.log("gender: "+this.state.gender);
+        console.log("story: "+this.state.story);
+        //根據使用者輸入的資料，進行任何其他運算、邏輯
+      }
+    }
+    window.addEventListener("load", ()=>{
+      ReactDOM.render(<Myform />,document.body);
+    })
+  </script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>

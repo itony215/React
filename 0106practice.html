@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+    class Item extends React.Component{
+      render(){
+        return <li>Item {this.props.index} </li>
+      }
+    }
+    class List extends React.Component{
+      render(){
+        return <ul>
+            <Item index="1" />
+            <Item index="2" />
+            <Item index="3" />
+          </ul>;
+      }
+    }
+    window.addEventListener("load",()=>{
+      let element = <List />;
+      ReactDOM.render(element, document.body);
+    });
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

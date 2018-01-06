@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Event事件處理</title>
+  <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+  <!-- 載入Babel 編譯器套件 -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <!-- 包含JSX 語法的javascript 必須使用 type="text/babel" -->
+  <style type="text/css">
+    .head-3 {
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+  </style>
+  <script type="text/babel">
+    {/*  //一般使用React.createElement 寫法
+      class MyHead extends React.Component {
+        render() {
+          //在屬性中註冊事件處理器 onclick => onClick
+          return React.createElement("h" + this.props.level, { onClick: this.clickHandler }, "Hello Component");
+        }
+        clcikHandler(e) { //事件處理器的第一個參數e 取得 event object
+          console.log("觸發點擊事件");
+          console.log(this); //this 預設沒有綁定任何物件 印出 undefined
+        }
+      }
+      window.addEventListener("load", () => {
+        let element = React.createElement(MyHead);
+        ReactDOM.render(element, document.body);
+      })
+    */} {
+    class MyHead extends React.Component{
+      constructor(props){
+        super(props);
+        this.state={color:"red"};
+      }
+      render(){
+        // 呼叫bind 設定當前的組件(this) 為綁定物件
+        return <div style={{color:this.state.color}} 
+                    onClick={this.clickHandler.bind(this)} 
+                    onMouseOver={this.mouseOverHandler.bind(this)}
+                    onMouseOut={this.mouseOutHandler.bind(this)}
+                    className={"head-"+this.props.level}>Hello Component</div>;
+        }
+        mouseOutHandler(e){
+          this.setState({color:'red'});
+        }
+        mouseOverHandler(e){
+          this.setState({color:"green"});
+        }
+        clickHandler(e){
+          // 當使用者點擊，把顏色換掉
+          this.setState({color:'blue'});
+          alert("clicked");
+          console.log("觸發點擊事件");
+          console.log(this.props); //this 預設沒有綁定任何物件 印出 undefined
+        }                          //bind綁定後 this為當前的組件 可取得props 或 state
+      }
+    window.addEventListener("load", () => {
+      let element = <MyHead level="3"/>;
+      ReactDOM.render(element, document.body);
+    })
+    }
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
