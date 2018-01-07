@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>JSX 的練習</title>
+	<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+	<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+	<!-- 載入 Babel 編譯器，才能將 JSX 語法編譯成瀏覽器相容的 JavaScript 程式 -->
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	<!-- 額外撰寫 CSS 規則，利用 class 選擇器調整項目的樣式 -->
+	<style type="text/css">
+		.list{text-decoration:underline;}
+	</style>
+	<!-- 須設定 type="text/babel"，才能撰寫 JSX 語法 -->
+	<script type="text/babel">
+		// MyItem 組件類別，用來顯示列表中的項目
+		class MyItem extends React.Component{
+			render(){
+				// 根據 index 和 color 屬性處理畫面，將 className 設定為 list 可對應外部的 CSS 規則
+				return <li className="list"
+					style={{color:this.props.color}}>Item {this.props.index}</li>;
+			}
+		}
+		// MyList 組件類別，用來顯示列表的主要結構
+		class MyList extends React.Component{
+			render(){
+				// 在 ul 中建立三個自訂的 MyItem 組件，並設定適當的屬性，交由 MyItem 中的繪圖規則處理
+				return <ul>
+					<MyItem index="0" color="red" />
+					<MyItem index="1" color="green" />
+					<MyItem index="2" color="blue" />
+				</ul>;
+			}
+		}
+		window.addEventListener("load", ()=>{
+			// 將 MyList 組件繪製到 body 中
+			ReactDOM.render(<MyList/>, document.body);
+		});
+	</script>
+</head>
+<body>
+</body>
+</html>1588

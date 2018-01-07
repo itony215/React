@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>事件處理練習解答</title>
+	<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+	<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	<script type="text/babel">
+		// 加入事件處理器，達成效果：滑鼠移入，變紅色；滑鼠移出，變回黑色。
+		// 建立自訂組件，取名字為 MyText
+		class MyText extends React.Component{
+			constructor(props){
+				super(props);
+				this.state={color:"black"};
+			}
+			render(){
+				return <div
+					style={{color:this.state.color}} // 根據 state 設定，加入行內樣式
+					onMouseOver={this.mouseOver.bind(this)} // 加入事件處理器，並綁定組件
+					onMouseOut={this.mouseOut.bind(this)} // 加入事件處理器，並綁定組件
+				>這是文字</div>;
+			}
+			mouseOver(e){
+				this.setState({color:"red"}); // 滑鼠移入時，變成紅色
+			}
+			mouseOut(e){
+				this.setState({color:"black"}); // 滑鼠移入時，變成黑色
+			}
+		}
+		window.addEventListener("load", ()=>{
+			// 建立自訂組件，取名字為 MyText
+			ReactDOM.render(<MyText/>, document.body);
+		});
+	</script>
+</head>
+<body>
+</body>
+</html>1332

@@ -12,15 +12,16 @@
   <script type="text/babel">
     class Item extends React.Component{
       render(){
-        return <li>Item {this.props.index} </li>
+        return <li style={{color:this.props.color}}>Item {this.props.index} </li>
       }
     }
     class List extends React.Component{
       render(){
         return <ul>
-            <Item index="1" />
-            <Item index="2" />
-            <Item index="3" />
+            <Item index="1" color="red"/>
+            <Item index="2" color="green"/>
+            <Item index="3" color="blue"/>
+            <Item index="4" />
           </ul>;
       }
     }

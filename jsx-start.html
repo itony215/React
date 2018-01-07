@@ -10,22 +10,28 @@
   <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
   <!-- 載入Babel 編譯器套件 -->
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <style type="text/css">
+    .head {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  </style>
   <!-- 包含JSX 語法的javascript 必須使用 type="text/babel" -->
   <script type="text/babel">
     //設計組件類別
     
     class MyHead extends React.Component{
       render(){
-        //return React.createElement("div",{className:"head"},"Hello World"+this.props.level);
-        return <div className="head">Hello World {this.props.level}</div>;
+        //return React.createElement("div",{className:"head", style:{color:this.props.color}},"Hello World"+this.props.level);
+        return <div className="head" style={{color:this.props.color}}>Hello World {this.props.level}</div>;
       }
     }
     class MyHeadList extends React.Component{
       render(){
         return <div>
-            <MyHead level="1"/>
-            <MyHead level="2"/>
-            <MyHead level="3"/>
+            <MyHead level="1" color="red"/>
+            <MyHead level="2" color="green"/>
+            <MyHead level="3" color="blue"/>
           </div>
       }
     }
