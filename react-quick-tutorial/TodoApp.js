@@ -6,7 +6,7 @@ class TodoApp extends React.Component {
     let headerProps = {
       title: "我的待辦事項",
       username: "Tony",
-      todoCount: "99"
+      todoCount: 99
     };
     let { title, username, ...other } = headerProps;
     return (
