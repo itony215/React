@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>選項開關元件</title>
+	<style type="text/css">
+		.switch{background-color:#cccccc;width:60px;height:30px;border-radius:15px;}
+		.switch>.btn{background-color:#444444;width:30px;height:30px;border-radius:15px;}
+		.switch-on{background-color:#aaffaa;}
+		.switch-on>.btn{background-color:#006600;margin-left:30px;}
+	</style>
+	<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+	<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	<script type="text/babel">
+		// 建立 Button 組件，代表開關中的按鈕
+		class Button extends React.Component{
+			render(){
+				return <div className="btn"></div>
+			}
+		}
+		// 建立 Switch 組件，代表選項開關
+		class Switch extends React.Component{
+			constructor(props){
+				super(props);
+				this.state={on:false}; // 簡單的初始狀態：true 代表開、false 代表關
+			}
+			render(){
+				/*
+					透過 class 選擇器的設計：
+						若狀態為【開】，在 className 中加入 switch-on，產生【開】的介面
+						若狀態為【關】，在 className 只保留 switch，產生【關】的介面
+				*/
+				return <div className={"switch"+(this.state.on?" switch-on":"")} onClick={this.update.bind(this)}>
+					<Button/>
+				</div>;
+			}
+			update(){
+				// 切換開關的狀態
+				this.setState((currentState)=>({on:!currentState.on}));
+			}
+		}
+		window.addEventListener("load", ()=>{
+			// 可輕易的將 Switch 元件套用在網頁的不同地方
+			ReactDOM.render(<Switch/>, document.getElementById("switch-1"));
+			ReactDOM.render(<Switch/>, document.getElementById("switch-2"));
+		});
+	</script>
+</head>
+<body>
+	<div id="switch-1"></div>
+	<hr/>
+	<div id="switch-2"></div>
+</body>
+</html>1912

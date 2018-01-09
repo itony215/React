@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Switch</title>
+  <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <style type="text/css">
+    .switch {
+      width: 60px;
+      height: 30px;
+      background-color: #dddddd;
+      border-radius: 15px;
+    }
+
+    .switch>.btn {
+      width: 30px;
+      height: 30px;
+      background-color: #444444;
+      border-radius: 15px;
+    }
+
+    .switch-on {
+      background-color: #ddffdd;
+    }
+
+    .switch-on>.btn {
+      background-color: #448844;
+      margin-left: 30px;
+    }
+  </style>
+  <script type="text/babel">
+  class Switch extends React.Component{
+    constructor(props){
+      super(props);
+      this.state={on:false};
+    }
+    render(){
+      let className="switch";
+      if(this.state.on){//如果是true
+        className+=" switch-on";
+      }
+      return <div onClick={this.update.bind(this)} className={className}>
+          <div className="btn"></div>
+        </div>
+    }
+  update(e){
+    this.setState((currentState,currentProps)=>({on:!currentState.on}))
+  }
+}
+  window.addEventListener("load",()=>{
+    // 可輕易的將 Switch 元件套用在網頁的不同地方
+    ReactDOM.render(<Switch/>,document.getElementById("switch-0"));
+    ReactDOM.render(<Switch/>,document.getElementById("switch-1"));
+  });
+  
+  </script>
+</head>
+
+<body>
+  <div id="switch-0"></div>
+  <hr/>
+  <div id="switch-1"></div>
+</body>
+
+</html>

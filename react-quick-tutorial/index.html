@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+    class First extends React.Component{
+      render(){
+        return <div>Hello React</div>
+      }
+    }
+    window.addEventListener("load",()=>{
+      let element = <First/>;
+      var text = 'hello, app';
+      var app2 = <div>{text}</div>;
+
+      ReactDOM.render(element,document.getElementById("react"));
+      ReactDOM.render(app2,document.getElementById("app2"));
+      ReactDOM.render(<div>direct</div>,document.getElementById("direct"));
+    })
+  </script>
+</head>
+
+<body>
+  <div>hello, world</div>
+  <div id="react"></div>
+  <div id="app2"></div>
+  <div id="direct"></div>
+  <div id="app"></div>
+  <!-- 1. 初始 window.App -->
+  <script>window.App = {}</script>
+
+  <script type="text/babel" src="./InputField.js"></script>
+  <script type="text/babel" src="./TodoHeader.js"></script>
+  <script type="text/babel" src="./Todolist.js"></script>
+  <!-- 2. 引入 TodoApp.js -->
+  <script type="text/babel" src="./TodoApp.js"></script>
+  <script type="text/babel">
+        // 3. 從 window.App 中，取得 TodoApp 元件
+        const { TodoApp } = window.App;
+        //上面寫法等於 var TodoApp = window.App.TodoApp;
+        ReactDOM.render(
+          <TodoApp />, // 4. 將 TodoApp 元件渲染在 container 中
+          document.getElementById('app')
+        );
+      </script>
+</body>
+
+</html>
