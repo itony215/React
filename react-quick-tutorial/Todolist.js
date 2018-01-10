@@ -9,19 +9,23 @@ class TodoItem extends React.Component {
     );
   }
 }
+
 class Todolist extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { numberOfItem: 5 };
+    this.state = { numberOfItem: [1, 2, 3, 4, 5] };
   }
   render() {
-    let list = [];
+    /*let list = [];
     let item;
     for (let i = 1; i < this.state.numberOfItem; i++) {
       item = <TodoItem index={i} />;
       list.push(item);
     }
-    return React.createElement("ul", null, list);
+    return React.createElement("ul", null, list);*/
+    const { numberOfItem } = this.state;
+    let items = numberOfItem.map(item => <TodoItem index={item} />);
+    return <ul>{items}</ul>;
   }
 }
 window.App.Todolist = Todolist;
