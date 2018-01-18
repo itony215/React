@@ -1,0 +1,125 @@
+<!-- 因為請求 JS 檔案和 API 沒寫在同一張檔案 所以需要live-server -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>0117practice</title>
+  <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+   
+   class TodoHeader extends React.Component{
+    render(){
+      const{ title,username, todoCount} = this.props;
+       return <div>
+                <h1>{title}</h1>
+                <span>哈囉，{username}：你有 {todoCount} 項未完成待辦事項</span>
+              </div>
+     }
+   }
+  TodoHeader.defaultProps = {
+  title: '我的待辦清單',
+  username: 'Guest',
+  todoCount: 0
+};
+   class InputField extends React.Component{
+    render(){
+       return  <input {...this.props} type="text" />
+     }
+   }
+
+   class TodoList extends React.Component{
+    render(){
+      const {todos} = this.props;
+      const todoElements = todos.map((todo)=>(
+        <li key={todo.id}>
+          <TodoItem title={todo.title} completed={todo.completed} />
+          </li>
+      ));
+       return <ul>{todoElements}</ul>;
+     }
+   }
+
+   class TodoItem extends React.Component{
+     constructor(props,context){
+       super(props,context);
+       this.state = {editable:false};
+       this.toggleEditMode = this.toggleEditMode.bind(this)
+
+     }
+     toggleEditMode(){
+       this.setState({editable: !this.state.editable});
+     }
+    render(){
+      return this.state.editable ? this.renderEditMode() : this.renderViewMode();
+
+      
+     }
+     renderViewMode(){
+      const {title,completed} = this.props;
+        return <div>
+                <input type="checkbox" checked={completed}/>
+                  <span onDoubleClick={this.toggleEditMode}>{title}</span>
+                  <button>X</button>
+        </div>;
+     }
+     renderEditMode(){
+       const {title} = this.props;
+      return (<InputField autoFocus placeholder="編輯"value={this.props.title}onBlur={this.toggleEditMode}onKeyDown={(e)=>{
+          if(e.keyCode===27){
+            e.preventDefault();
+            this.toggleEditMode();
+          }
+      }}/>)
+     }
+   }
+
+   class TodoApp extends React.Component{
+      constructor(props, context) {
+    super(props, context);
+    this.state = {
+      todos: [
+        {
+          id: 0,
+          title: 'Item 1',
+          completed: false
+        },
+        {
+          id: 1,
+          title: 'Item 2',
+          completed: false
+        },
+        {
+          id: 2,
+          title: 'Item 3',
+          completed: false
+        }
+      ]
+    };
+  }
+     render(){
+       const {todos} = this.state;
+       return <div>
+                  <TodoHeader title="我的待辦清單" username="Tony" todoCount={99}/>
+                  <InputField placeholder="新增待辦清單" />
+                  <TodoList todos={todos}/>
+              </div>;
+     }
+   }
+
+  ReactDOM.render(<TodoApp/>,document.getElementById("todoapp"))
+
+
+  </script>
+</head>
+
+<body>
+  <div id="todoapp"></div>
+
+</body>
+
+</html>
