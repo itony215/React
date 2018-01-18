@@ -34,10 +34,11 @@
 
    class TodoList extends React.Component{
     render(){
-      const {todos} = this.props;
+      const {todos,onDeleteTodo} = this.props;
       const todoElements = todos.map((todo)=>(
         <li key={todo.id}>
-          <TodoItem title={todo.title} completed={todo.completed} />
+          <TodoItem title={todo.title} completed={todo.completed}
+          onDelete={()=>onDeleteTodo && onDeleteTodo(todo.id)} />
           </li>
       ));
        return <ul>{todoElements}</ul>;
@@ -60,11 +61,11 @@
       
      }
      renderViewMode(){
-      const {title,completed} = this.props;
+      const {title,completed,onDelete} = this.props;
         return <div>
                 <input type="checkbox" checked={completed}/>
                   <span onDoubleClick={this.toggleEditMode}>{title}</span>
-                  <button>X</button>
+                  <button onClick={()=>onDelete && onDelete()}>X</button>
         </div>;
      }
      renderEditMode(){
@@ -77,8 +78,13 @@
       }}/>)
      }
    }
-
+const _deleteTodo = (todos, id) => {
+  const idx = todos.findIndex((todo) => todo.id === id);
+  if (idx !== -1) todos.splice(idx, 1);
+  return todos;
+};
    class TodoApp extends React.Component{
+     
       constructor(props, context) {
     super(props, context);
     this.state = {
@@ -101,12 +107,13 @@
       ]
     };
   }
+  
      render(){
        const {todos} = this.state;
        return <div>
-                  <TodoHeader title="我的待辦清單" username="Tony" todoCount={99}/>
+                  <TodoHeader todoCount={todos.filter((todo)=>!todo.completed).length}/>
                   <InputField placeholder="新增待辦清單" />
-                  <TodoList todos={todos}/>
+                  <TodoList todos={todos} onDeleteTodo={(...args)=>this.setState({todos:_deleteTodo(todos,...args)})}/>
               </div>;
      }
    }
